@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Paritok proxy — run locally before starting this stack:
+  #   paritok proxy --port 8080 --config-file paritok.yaml
+  # The proxy listens on host port 8080 and forwards compressed requests upstream.
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - PORT=8081
+      - PARITOK_API_KEY=${PARITOK_API_KEY}
+      - PARITOK_BASE_URL=http://host.docker.internal:8080
+      - EVM_WS_URL=${EVM_WS_URL:-wss://testnet-rpc.monad.xyz/ws}
+      - RUST_LOG=info
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_WS_URL=ws://localhost:8081/ws
+    depends_on:
+      - backend
+    restart: unless-stopped

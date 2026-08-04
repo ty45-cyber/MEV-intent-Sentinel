@@ -1,0 +1,19 @@
+# Environment variables
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+backend/.env
+backend/.env.local
+contracts/.env
+
+# Paritok proxy config (contains api_key)
+paritok.yaml
+
+# Dependencies
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+
+# Rust build artifacts
+backend/target/

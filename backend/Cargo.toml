@@ -1,0 +1,27 @@
+[package]
+name = "mev-intent-sentinel"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Ethereum Primitives & Provider (Alloy)
+alloy = { version = "2", features = ["full"] }
+alloy-provider = { version = "2", features = ["ws"] }
+
+# Web Server & Concurrency
+axum = { version = "0.7", features = ["ws"] }
+tokio = { version = "1", features = ["full"] }
+futures-util = "0.3"
+
+# Serialization & HTTP Client for Paritok AI
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+reqwest = { version = "0.12", features = ["json"] }
+
+# System Telemetry & Utilities
+tracing = "0.1"
+tracing-subscriber = "0.3"
+tower-http = { version = "0.5", features = ["cors"] }
+dotenvy = "0.15"
+eyre = "0.6"
+hex = "0.4"
